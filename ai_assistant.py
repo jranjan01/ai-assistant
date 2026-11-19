@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 from tools import FUNCTION_NAME_TO_FUNCTION, TOOLS
+from utils.log import log
 
 load_dotenv()
 
@@ -23,8 +24,8 @@ conversation.append(
 )
 
 while True:
-    user_input = input("User: ")
-    if user_input.lower() == "exit":
+    user_input = input("\n👤 YOU: ")
+    if user_input.lower() in ["exit", "quit", "bye", "goodbye"]:
         break
     try:
         conversation.append({"role": "user", "content": user_input})
@@ -41,8 +42,11 @@ while True:
                 assistant_reply = msg.content or "I couldn't generate a response."
 
                 conversation.append({"role": "assistant", "content": assistant_reply})
-                print("Assistant: ", assistant_reply)
+                log(f"  ↳ {assistant_reply}")
+                print("\n🤖 Assistant: ", assistant_reply)
                 break
+
+            log(f"step {step + 1}: model requested {len(msg.tool_calls)} tool call(s).")
 
             # Save assistant message containing tool calls
 
@@ -64,6 +68,7 @@ while True:
                     result = {"error": f"Invalid JSON arguments: {parse_error}"}
 
                 fn = FUNCTION_NAME_TO_FUNCTION.get(tool_name)
+                log(f" 🔧 Calling tool: {tool_name} with args: {tool_args}")
 
                 if fn is None:
                     result = {"error": f"Unknown tool: {tool_name}"}
@@ -93,4 +98,5 @@ while True:
             continue
 
     except (ValueError, TypeError, KeyError, RuntimeError) as e:
+        log(f" 🛑 Error: {e!s}")
         print("Error:", str(e))

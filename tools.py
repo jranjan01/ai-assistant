@@ -47,7 +47,6 @@ def get_my_city() -> str:
     return "Hyderabad"
 
 
-
 TOOLS = [
     {
         "type:": "function",
