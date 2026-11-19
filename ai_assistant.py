@@ -6,6 +6,7 @@ from openai import OpenAI
 
 from tools import FUNCTION_NAME_TO_FUNCTION, TOOLS
 from utils.log import log
+from utils.system_prompt import SYSTEM_PROMPT
 
 load_dotenv()
 
@@ -19,12 +20,12 @@ conversation = []
 conversation.append(
     {
         "role": "system",
-        "content": "You are a helpful assistant. and respond under 100 words.",
+        "content": SYSTEM_PROMPT,
     }
 )
 
 while True:
-    user_input = input("\n👤 YOU: ")
+    user_input = input("\n👤 You: ")
     if user_input.lower() in ["exit", "quit", "bye", "goodbye"]:
         break
     try:
