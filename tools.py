@@ -4,6 +4,7 @@ import requests
 
 WEATHER_API = "https://api.open-meteo.com/v1/forecast"
 GEOCODE_API = "https://geocoding-api.open-meteo.com/v1/search"
+IP_ADDRESS_API = "https://ipwho.is/"
 
 
 def get_current_date():
@@ -40,11 +41,17 @@ def get_weather(city: str) -> str:
         return f"Error while fetching weather data: {e}"
 
 
-def get_my_city() -> str:
+def get_my_location() -> str:
     """
-    Returns the user's current city name when they ask about their current location, where they are, or where they live.
+    call this tool whenever the user asks where they live,
+    where they are currently located, or what city they are in.
+    Returns only the user's city name.
     """
-    return "Hyderabad"
+    try:
+        data = requests.get(IP_ADDRESS_API, timeout=10).json()
+        return data.get("city", "Unknown city")
+    except requests.RequestException as e:
+        return f"Error while fetching location data: {e}"
 
 
 TOOLS = [
@@ -76,8 +83,8 @@ TOOLS = [
     {
         "type": "function",
         "function": {
-            "name": "get_my_city",
-            "description": "Returns the user's current city name when they ask about their current location, where they are, or where they live.",
+            "name": "get_my_location",
+            "description": "call this tool whenever the user asks where they live, where they are currently located, or what city they are in. Returns only the user's city name.",
             "parameters": {"type": "object", "properties": {}, "required": []},
         },
     },
@@ -86,5 +93,5 @@ TOOLS = [
 FUNCTION_NAME_TO_FUNCTION = {
     "get_current_date": get_current_date,
     "get_weather": get_weather,
-    "get_my_city": get_my_city,
+    "get_my_location": get_my_location,
 }
