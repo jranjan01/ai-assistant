@@ -1,4 +1,7 @@
-# AI assistant
+# AI Agent with RAG
+
+A command-line chat agent that streams its answers, calls tools, and answers
+questions from your own documents using retrieval-augmented generation (RAG).
 
 ### Project Setup and Execution
 

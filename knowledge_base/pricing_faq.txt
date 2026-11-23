@@ -1,0 +1,15 @@
+WHAT PLANS ARE AVAILABLE?
+Free ($0), Pro ($29 per user per month), and Enterprise (custom pricing).
+ 
+IS THERE A FREE TRIAL?
+Pro includes a 14-day free trial. No credit card is required.
+ 
+WHAT IS INCLUDED IN FREE?
+Up to 3 projects, 1 GB storage, and community support only.
+
+DO YOU OFFER DISCOUNTS?
+Non-profits and students get 40% off Pro. Annual billing gives 15% off.
+ 
+WHERE IS DATA STORED?
+Data is stored in AWS regions: us-east-1, eu-west-1 and ap-south-1.
+Customers can choose the region when creating a workspace.

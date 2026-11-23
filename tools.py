@@ -2,6 +2,8 @@ from datetime import datetime
 
 import requests
 
+from rag import search_knowledge_base
+
 WEATHER_API = "https://api.open-meteo.com/v1/forecast"
 GEOCODE_API = "https://geocoding-api.open-meteo.com/v1/search"
 IP_ADDRESS_API = "https://ipwho.is/"
@@ -88,10 +90,32 @@ TOOLS = [
             "parameters": {"type": "object", "properties": {}, "required": []},
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_knowledge_base",
+            "description": (
+                "Search the company knowledge base: leave policy, refund policy, "
+                "API guide and pricing FAQ. Call this for any question about "
+                "company policies, pricing, refunds or the Cloud API."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The user's question, or the key words to search for.",
+                    }
+                },
+                "required": ["query"],
+            },
+        },
+    },
 ]
 
 FUNCTION_NAME_TO_FUNCTION = {
     "get_current_date": get_current_date,
     "get_weather": get_weather,
     "get_my_location": get_my_location,
+    "search_knowledge_base": search_knowledge_base,
 }

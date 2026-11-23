@@ -1,0 +1,12 @@
+AUTHENTICATION
+All requests need an API key in the header: Authorization: Bearer <API_KEY>, Keys can be created in Dashboard > Settings > API Keys, Keys expire after 90 days and must be rotated.
+
+RATE LIMITS
+Free plan: 60 requests per minute, Pro plan: 600 requests per minute, Enterprise plan: 6,000 requests per minute, Exceeding the limit returns HTTP 429. Retry after the time in the Retry-After header.
+
+ERROR CODES
+400: Invalid request body.
+401: Missing or invalid API key.
+404: Resource not found.
+429: Rate limit exceeded.
+500: Internal server error, retry with exponential backoff.

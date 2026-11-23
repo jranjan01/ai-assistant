@@ -1,4 +1,5 @@
-openai
-dotenv
-requests
-ruff
+openai>=2.8.1
+python-dotenv>=1.2.1
+requests>=2.32.5
+ruff>=0.14.5
+numpy>=1.24.0

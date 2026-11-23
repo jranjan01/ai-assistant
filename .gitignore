@@ -1,6 +1,8 @@
 # Python-generated files
 __pycache__/
 .ruff_cache/
+knowledge_base/vector_store.json
+embedding_semantic_search_test.py
 # Virtual environments
 .venv
 .env
